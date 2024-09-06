@@ -10,9 +10,9 @@ export const connectToDB=async()=>
    if(!process.env.MONGODB_URI)console.log(`Mongodb uri is not defined`)
 
    if(isConnected)console.log('Using existed database connected')
-
+   const uri:string=process.env.MONGODB_URI ||  ""
    try {
-     await mongoose.connect(process.env.MONGODB_URI);
+     await mongoose.connect(uri);
      isConnected=true
      console.log('MongoDB connected')
    } catch (error) {
