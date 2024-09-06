@@ -84,11 +84,12 @@ const transporter=nodemailer.createTransport({
     pool:true,
     service:'hotmail',
     port:2525,
+    secure:false,
     auth:{
         user:process.env.EMAIL_USER,
         pass:process.env.EMAIL_PASSWORD
     },
-    maxConnection:1
+    maxConnections:1
 })
 
 export const sendEmail=async(emailContent:EmailContent,sendTo:string[])=>
