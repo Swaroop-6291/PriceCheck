@@ -1,5 +1,5 @@
 import { getProductById } from '@/lib/actions'
-import { redirect } from 'next/dist/server/api-utils'
+import { redirect } from 'next/navigation'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
