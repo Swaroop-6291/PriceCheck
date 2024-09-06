@@ -90,7 +90,7 @@ export async function addUserEmailToProduct(productId:string,userEmail:string)
 
         if(!product)return;
 
-        const userExists=product.users.some((user:User)=> user.email===userEmail)
+        const userExists=await product.users.some((user:User)=> user.email===userEmail)
 
         if(!userExists)
         {
@@ -103,6 +103,6 @@ export async function addUserEmailToProduct(productId:string,userEmail:string)
             await sendEmail(EmailContent,[userEmail])
         }
     } catch (error) {
-        
+        console.log(error)
     }
 }

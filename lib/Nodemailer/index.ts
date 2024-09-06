@@ -83,11 +83,11 @@ export async function generateEmailBody(
 const transporter=nodemailer.createTransport({
     pool:true,
     service:'hotmail',
-    port:2525,
+    port:587,
     secure:false,
     auth:{
         user:process.env.EMAIL_USER,
-        pass:process.env.EMAIL_PASSWORD
+        pass:process.env.EMAIL_PASSWORD,
     },
     maxConnections:1
 })
@@ -101,8 +101,10 @@ export const sendEmail=async(emailContent:EmailContent,sendTo:string[])=>
         subject:emailContent.subject
     }
 
-    await transporter.sendMail(mailOption,(error:any,info:any)=>{
-        if(error)return console.log(error)
-        console.log('Email Sent: ',info)
-    })
+    try {
+      const info = await transporter.sendMail(mailOption);
+      console.log('Email Sent: ', info);
+    } catch (error) {
+        console.error('Error sending email:', error);
+    }
   }
